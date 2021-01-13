@@ -1,0 +1,25 @@
+{
+  "name": "office_munchies",
+  "version": "1.0.0",
+  "description": "StackHack 2.0 Backend attemp",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "keywords": [
+    "StackHack"
+  ],
+  "author": "Keerat666",
+  "license": "ISC",
+  "dependencies": {
+    "@admin-bro/express": "^3.1.0",
+    "@admin-bro/mongoose": "^1.1.0",
+    "admin-bro": "^3.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.11.11",
+    "swagger-ui-express": "^4.1.6"
+  }
+}
