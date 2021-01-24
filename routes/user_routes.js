@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const UserModel = require('../models/users')
+var multer = require('multer')
+
+var cloudinary = require('../controllers/cloudinary');
+
 var users = require('../controllers/users')
 
 var crud = require('../middlewares/crud')
@@ -21,6 +25,14 @@ router.post('/saveUser', function(req, res) {
     crud.createEntry(req, res, UserModel)
 });
 
+router.post('/login', function(req, res) {
+    users.user_login(req, res)
+});
+
+router.post('/order', function(req, res) {
+    users.place_order(req, res)
+});
+
 router.put('/editUser', function(req, res) {
     crud.updateEntryByID(req, res, UserModel);
 });
@@ -28,5 +40,17 @@ router.put('/editUser', function(req, res) {
 router.delete('/deleteUser', function(req, res) {
     crud.deleteEntryByID(req, res, UserModel);
 });
+
+router.post(
+    '/upload_photo',
+    multer({ dest: 'temp/', limits: { fieldSize: 8 * 1024 * 1024 } }).single(
+        'image'
+    ),
+    function(req, res) {
+        cloudinary.upload_single_image(req, res)
+    }
+)
+const upload = multer({ dest: 'uploads/' })
+var cpUpload_cloud = upload.fields([{ name: 'photos' }])
 
 module.exports = router;

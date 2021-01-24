@@ -1,6 +1,6 @@
 //code extra business logic for users here leaving CRUD
 const UserModel = require('../models/users')
-
+const OrderModel = require('../models/orders')
 module.exports = {
     user_login(req, res) {
         var body = req.body;
@@ -20,15 +20,13 @@ module.exports = {
                     console.log("Entered Password " + req.body.password)
                     console.log("DB Password" + UserModel1.password)
 
-                    if (req.body.password === UserModel1.password) {
+                    if (req.body.password == UserModel1.password) {
 
-                        console.log("result" + result)
-                        console.log("Error : " + err)
                         if (err) {
                             return res.status(503).json({ "login": false, "err": err });
 
                         }
-                        if (result) {
+                        if (UserModel) {
 
 
 
@@ -39,6 +37,11 @@ module.exports = {
                             return res.status(403).json({ "login": false, "err": " Incorrect Pasword" });
 
                         }
+                    } else {
+
+                        return res.status(403).json({ "login": false, "err": "Incorrect Password" });
+
+
                     }
 
 
@@ -48,5 +51,30 @@ module.exports = {
 
             }
         });
+    },
+
+
+    place_order(req, res) {
+        var obj = req.body
+        var modelObj = new OrderModel(obj);
+
+
+        modelObj
+            .save()
+            .then(result => {
+
+                if (req.body.email != undefined) {
+                    //try sending mail
+                }
+                return res.status(201).json({ "order": "saved" });
+
+
+            }).catch(err => {
+                console.log(err)
+                res.status(500).json({
+                    error: err
+                })
+
+            })
     }
 }

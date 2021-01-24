@@ -53,7 +53,32 @@
             }
 
         },
+        "/users/upload_photo": {
+            "post": {
+                "tags": [
+                    "User ID"
+                ],
+                "description": "Save ID to Cloudinary",
+                "parameters": [{
+                    "image": "Image to be uploaded",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Image is saved to Cloudinary",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
 
+        },
         "/users/allUsers": {
 
             "get": {

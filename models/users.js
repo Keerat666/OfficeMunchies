@@ -13,6 +13,8 @@ var userSchema = new Schema({
     wallet: { type: Number, default: 100 },
     emp_no: { type: String, required: true },
     profile_picture: { type: String, default: "https://res.cloudinary.com/dwckgkzdz/image/upload/v1604757274/buddha_wyz1ek.jpg" },
+    office_id: { type: String, required: true },
+    organization_name: { type: String, default: "HackerEarth" },
 
 }, { collection: 'users_OM' });
 var UserModel = mongoose.model('users', userSchema);

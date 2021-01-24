@@ -3,6 +3,8 @@ var cors = require('cors')
 const app = express();
 const PORT = 8000;
 var usersRouter = require('./routes/user_routes');
+var foodRouter = require('./routes/food_router');
+
 var swaggerUi = require('swagger-ui-express')
 var swaggerDocument = require('./swagger.json');
 
@@ -37,9 +39,13 @@ var connection = require('./middlewares/connection').then(db => {
 //setting up swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
-//setting up route for user related API's
+console.log("Swagger running at port 8000 at /api-docs")
+    //setting up route for user related API's
 app.use('/api/v1/users', usersRouter);
+
+app.use('/api/v1/food_items', foodRouter);
+
+
 app.listen(PORT, () => {
     console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 });

@@ -13,7 +13,7 @@ module.exports = {
             .save()
             .then(result => {
 
-                return res.status(201).json({ "message": "saved" });
+                return res.status(201).json({ "message": "saved", "userID": result._id });
 
 
             }).catch(err => {
@@ -32,6 +32,7 @@ module.exports = {
     getAllEntries(req, res, modelObj)
 
     {
+
         modelObj
             .find()
             .then(result => {
@@ -119,6 +120,26 @@ module.exports = {
 
             })
 
-    }
+    },
+
+    getAllEntriesv2(req, res, modelObj)
+
+    {
+
+        modelObj
+            .find({ "item_availability": "True" })
+            .then(result => {
+
+                return res.status(201).json(result);
+
+
+            }).catch(err => {
+                console.log(err)
+                res.status(500).json({
+                    error: err
+                })
+
+            })
+    },
 
 }
