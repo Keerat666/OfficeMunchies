@@ -49,3 +49,5 @@ app.use('/api/v1/food_items', foodRouter);
 app.listen(PORT, () => {
     console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 });
+
+module.exports = app;
