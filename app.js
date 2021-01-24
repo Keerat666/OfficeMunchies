@@ -22,7 +22,7 @@ var connection = require('./middlewares/connection').then(db => {
     var adminBroRouter = require('./routes/admin_bro');
     //setting up admin bro
     app.use('/admin', adminBroRouter)
-    app.listen(8080, () => {
+    app.listen(process.env.PORT || 8080, () => {
 
         console.log('AdminBro is under localhost:8080/admin')
 
